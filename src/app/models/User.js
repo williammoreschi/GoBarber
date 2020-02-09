@@ -24,6 +24,14 @@ class User extends Model {
     return this;
   }
 
+  /*
+   * Criado uma assoição entre a coluna ID da tabela files com coluna AVATAR_ID
+   * na tabela users
+   */
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+  }
+
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);
   }
