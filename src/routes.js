@@ -6,6 +6,7 @@ import UserController from './app/controllers/UserController';
 import FileController from './app/controllers/FileController';
 import ProviderControllers from './app/controllers/ProviderController';
 import AppointmentController from './app/controllers/AppointmentController';
+import ScheduleController from './app/controllers/ScheduleController';
 import authMiddleware from './app/middlwares/auth';
 
 const routes = new Router();
@@ -35,5 +36,7 @@ routes.get('/providers', ProviderControllers.index);
 routes.get('/appointment', AppointmentController.index);
 
 routes.post('/appointment', AppointmentController.store);
+
+routes.get('/schedule', ScheduleController.index);
 
 export default routes;
