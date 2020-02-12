@@ -22,5 +22,18 @@ class NotificationController {
       .limit(20);
     return res.json(notifcations);
   }
+
+  async update(req, res) {
+    /**
+     * A opcao new:true depois de atalizar o registro
+     * ele vai devolver o mesmo atualizado
+     * */
+    const notifcation = await Notification.findByIdAndUpdate(
+      req.params.id,
+      { read: true },
+      { new: true }
+    );
+    return res.json({ notifcation });
+  }
 }
 export default new NotificationController();
