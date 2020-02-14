@@ -2,7 +2,6 @@ import Sequelize, { Model } from 'sequelize';
 
 class File extends Model {
   static init(sequelize) {
-    const pathAvatar = 'http://localhost:3333/files';
     super.init(
       {
         name: Sequelize.STRING,
@@ -10,7 +9,7 @@ class File extends Model {
         url: {
           type: Sequelize.VIRTUAL,
           get() {
-            return `${pathAvatar}/${this.path}`;
+            return `${process.env.APP_URL}/files/${this.path}`;
           },
         },
       },
