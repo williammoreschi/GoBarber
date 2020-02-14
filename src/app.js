@@ -1,6 +1,9 @@
 import express from 'express';
 import path from 'path';
+import * as Sentry from '@sentry/node';
 import routes from './routes';
+import 'express-async-errors';
+import sentryConfig from './config/sentry';
 
 import './database/index';
 
@@ -8,11 +11,14 @@ class App {
   constructor() {
     this.server = express();
 
+    Sentry.init(sentryConfig);
+
     this.middlewares();
     this.routes();
   }
 
   middlewares() {
+    this.server.use(Sentry.Handlers.requestHandler());
     this.server.use(express.json());
     this.server.use(
       '/files',
@@ -22,6 +28,7 @@ class App {
 
   routes() {
     this.server.use(routes);
+    this.server.use(Sentry.Handlers.errorHandler());
   }
 }
 
