@@ -1,4 +1,4 @@
-node_modules
-yarn-error.log
-.env
-tmp/uploads/*
+backend/node_modules
+backend/yarn-error.log
+backend/.env
+backend/tmp/uploads/*
