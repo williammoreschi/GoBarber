@@ -1,7 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+
+import { singInRequest } from '~/store/modules/auth/actions';
+
 import logo from '~/assets/images/logo.svg';
 
 const schema = Yup.object().shape({
@@ -12,8 +16,10 @@ const schema = Yup.object().shape({
 });
 
 export default function SingIn() {
-  function handleSubmit(data) {
-    console.tron.log(data);
+  const dispath = useDispatch();
+
+  function handleSubmit({ email, password }) {
+    dispath(singInRequest(email, password));
   }
   return (
     <>
