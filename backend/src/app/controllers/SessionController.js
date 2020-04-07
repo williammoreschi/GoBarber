@@ -14,9 +14,9 @@ class SessionController {
         {
           model: File,
           as: 'avatar',
-          attributes: ['id','path','url'],
-        }
-      ]
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
     });
 
     if (!user) {
@@ -39,7 +39,10 @@ class SessionController {
       expiresIn: authConfig.expiresIn,
     });
 
-    return res.json({ user: { id, name, email, provider, avatar, }, token: tokenJWT });
+    return res.json({
+      user: { id, name, email, provider, avatar },
+      token: tokenJWT,
+    });
   }
 }
 export default new SessionController();
