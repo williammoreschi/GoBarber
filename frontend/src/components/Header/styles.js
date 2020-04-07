@@ -26,11 +26,10 @@ export const Content = styled.div`
       font-weight: bold;
       color: #7519c1;
     }
-
-    aside {
-      display: flex;
-      align-items: center;
-    }
+  }
+  aside {
+    display: flex;
+    align-items: center;
   }
 `;
 export const Profile = styled.div`
