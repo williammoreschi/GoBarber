@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 import { updateProfileRequest } from '~/store/modules/user/actions';
+import { singOut } from '~/store/modules/auth/actions';
 import { Container } from './styles';
 
 import AvartarInput from './AvatarInput';
@@ -12,6 +13,9 @@ export default function Profile() {
   const loading = useSelector(state => state.user.loading);
   function handleSumit(data) {
     dispatch(updateProfileRequest(data));
+  }
+  function handleSingOut() {
+    dispatch(singOut());
   }
   return (
     <Container>
@@ -35,7 +39,9 @@ export default function Profile() {
           {loading ? 'Aguarde...' : 'Atualizar perfil'}
         </button>
       </Form>
-      <button type="button">Sair do GoBarber</button>
+      <button type="button" onClick={handleSingOut}>
+        Sair do GoBarber
+      </button>
     </Container>
   );
 }
