@@ -35,11 +35,15 @@ export default function Dashboard() {
         params: { date },
       });
 
+      // Pegando o timezone do navegador do usuário ex: America/Sao_Paulo
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
       const data = range.map(hour => {
+        // Pega o hario atual do navegado ex: 11:55:35 convert para hour:00:00
         const checkDate = setSeconds(setMinutes(setHours(date, hour), 0), 0);
+
         const compareDate = utcToZonedTime(checkDate, timezone);
+
         return {
           time: `${hour}:00h`,
           past: isBefore(compareDate, new Date()),
