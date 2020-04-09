@@ -17,8 +17,8 @@ export function* singIn({ payload }) {
     const { token, user } = response.data;
 
     if (!user.provider) {
-      // console.tron.error('Usuário não é um prestador');
       toast.error('Usuário não é um prestador');
+      yield put(singFailure());
       return;
     }
 
