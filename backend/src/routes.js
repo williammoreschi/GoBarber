@@ -14,7 +14,7 @@ import authMiddleware from './app/middlwares/auth';
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.get('/', (req, res) => res.json({ message: 'Online :)' }));
+routes.get('/', (req, res) => res.json({ message: 'Online... :)' }));
 
 routes.post('/users', UserController.store);
 
