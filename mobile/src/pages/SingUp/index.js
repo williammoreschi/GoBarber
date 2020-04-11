@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Image} from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -24,6 +24,7 @@ export default function SingUp({navigation}) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const loading = useSelector((state) => state.auth.loading);
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -69,7 +70,9 @@ export default function SingUp({navigation}) {
             valeu={password}
             onChangText={setPassword}
           />
-          <SubmitButton onPress={handleSubmit}>Criar Conta</SubmitButton>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Criar Conta
+          </SubmitButton>
         </Form>
         <SingLink onPress={() => navigation.navigate('SingIn')}>
           <SingLinkText>Já possuo uma conta </SingLinkText>

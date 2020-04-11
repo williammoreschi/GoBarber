@@ -1,5 +1,5 @@
 import React, {useRef, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Image} from 'react-native';
 import PropTypes from 'prop-types';
 import logo from '~/assets/logo.png';
@@ -21,6 +21,7 @@ export default function SingIn({navigation}) {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const loading = useSelector((state) => state.auth.loading);
 
   const passwordRef = useRef();
   function handleSubmit() {
@@ -52,7 +53,9 @@ export default function SingIn({navigation}) {
             valeu={password}
             onChangText={setPassword}
           />
-          <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Acessar
+          </SubmitButton>
         </Form>
         <SingLink onPress={() => navigation.navigate('SingUp')}>
           <SingLinkText>Criar conta gratuita</SingLinkText>
