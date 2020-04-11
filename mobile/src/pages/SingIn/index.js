@@ -1,7 +1,10 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {Image} from 'react-native';
 import PropTypes from 'prop-types';
 import logo from '~/assets/logo.png';
+
+import {singInRequest} from '~/store/modules/auth/actions';
 
 import Background from '~/components/Background';
 
@@ -15,8 +18,14 @@ import {
 } from './styles';
 
 export default function SingIn({navigation}) {
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const passwordRef = useRef();
-  function handleSubmit() {}
+  function handleSubmit() {
+    dispatch(singInRequest(email, password));
+  }
   return (
     <Background>
       <Container>
@@ -30,6 +39,8 @@ export default function SingIn({navigation}) {
             placeholder="Digite seu e-mail"
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
+            valeu={email}
+            onChangText={setEmail}
           />
           <FormInput
             icon="lock-outline"
@@ -38,6 +49,8 @@ export default function SingIn({navigation}) {
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={() => handleSubmit}
+            valeu={password}
+            onChangText={setPassword}
           />
           <SubmitButton onPress={handleSubmit}>Acessar</SubmitButton>
         </Form>
