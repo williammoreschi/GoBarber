@@ -43,7 +43,6 @@ export function* singUp({payload}) {
       name,
       email,
       password,
-      provider: true,
     });
     Alert.alert(
       'Conta criado com sucesso',
