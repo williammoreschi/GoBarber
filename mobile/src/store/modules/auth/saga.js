@@ -1,5 +1,5 @@
+import {Alert} from 'react-native';
 import {takeLatest, call, put, all} from 'redux-saga/effects';
-import {toast} from 'react-toastify';
 import {singInSuccess, singFailure} from './actions';
 
 // import history from '~/services/history';
@@ -16,8 +16,8 @@ export function* singIn({payload}) {
 
     const {token, user} = response.data;
 
-    if (!user.provider) {
-      toast.error('Usuário não é um prestador');
+    if (user.provider) {
+      Alert.alert('Erro no login', 'Usuário não pode ser um prestador');
       yield put(singFailure());
       return;
     }
@@ -28,7 +28,10 @@ export function* singIn({payload}) {
 
     // history.push('/dashboard');
   } catch (err) {
-    toast.error('Falha na autenticação, verifique seus dados');
+    Alert.alert(
+      'Falha na autenticação',
+      'Houve um erro no login, verifique seus dados',
+    );
     yield put(singFailure());
   }
 }
@@ -42,10 +45,16 @@ export function* singUp({payload}) {
       password,
       provider: true,
     });
-    toast.success('Falha no cadastro, verifique seus dados');
+    Alert.alert(
+      'Conta criado com sucesso',
+      'Agora você pode fazer seus agendamentos',
+    );
     // history.push('/');
   } catch (err) {
-    toast.error('Conta criado com sucesso');
+    Alert.alert(
+      'Falha no cadastro',
+      'Houve um erro no cadastro, verifique seus dados',
+    );
     yield put(singFailure());
   }
 }
