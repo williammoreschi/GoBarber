@@ -1,10 +1,13 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
+import {useDispatch} from 'react-redux';
 import {Image} from 'react-native';
 import PropTypes from 'prop-types';
 
 import logo from '~/assets/logo.png';
 
 import Background from '~/components/Background';
+
+import {singUpRequest} from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -16,9 +19,19 @@ import {
 } from './styles';
 
 export default function SingUp({navigation}) {
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const emailRef = useRef();
   const passwordRef = useRef();
-  function handleSubmit() {}
+
+  function handleSubmit() {
+    dispatch(singUpRequest());
+  }
+
   return (
     <Background>
       <Container>
@@ -31,6 +44,8 @@ export default function SingUp({navigation}) {
             placeholder="Nome Completo"
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
+            valeu={name}
+            onChangText={setName}
           />
           <FormInput
             icon="mail-outline"
@@ -41,6 +56,8 @@ export default function SingUp({navigation}) {
             ref={emailRef}
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
+            valeu={email}
+            onChangText={setEmail}
           />
           <FormInput
             icon="lock-outline"
@@ -49,6 +66,8 @@ export default function SingUp({navigation}) {
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={() => handleSubmit}
+            valeu={password}
+            onChangText={setPassword}
           />
           <SubmitButton onPress={handleSubmit}>Criar Conta</SubmitButton>
         </Form>
