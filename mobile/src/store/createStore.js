@@ -1,9 +1,8 @@
-import { createStore, compose, applyMiddleware } from 'redux';
+import {createStore, compose, applyMiddleware} from 'redux';
 
 export default (reducer, middlwares) => {
-  const enhancer =
-    process.env.NODE_ENV === 'development'
-      ? compose(console.tron.createEnhancer(), applyMiddleware(...middlwares))
-      : applyMiddleware(...middlwares);
+  const enhancer = __DEV__
+    ? compose(console.tron.createEnhancer(), applyMiddleware(...middlwares))
+    : applyMiddleware(...middlwares);
   return createStore(reducer, enhancer);
 };
