@@ -46,7 +46,7 @@ export default function SingUp({navigation}) {
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
             valeu={name}
-            onChangText={setName}
+            onChangeText={setName}
           />
           <FormInput
             icon="mail-outline"
@@ -58,7 +58,7 @@ export default function SingUp({navigation}) {
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
             valeu={email}
-            onChangText={setEmail}
+            onChangeText={setEmail}
           />
           <FormInput
             icon="lock-outline"
@@ -68,7 +68,7 @@ export default function SingUp({navigation}) {
             returnKeyType="send"
             onSubmitEditing={() => handleSubmit}
             valeu={password}
-            onChangText={setPassword}
+            onChangeText={setPassword}
           />
           <SubmitButton loading={loading} onPress={handleSubmit}>
             Criar Conta

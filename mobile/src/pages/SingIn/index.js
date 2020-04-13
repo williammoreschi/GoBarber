@@ -41,7 +41,7 @@ export default function SingIn({navigation}) {
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
             valeu={email}
-            onChangText={setEmail}
+            onChangeText={setEmail}
           />
           <FormInput
             icon="lock-outline"
@@ -51,7 +51,7 @@ export default function SingIn({navigation}) {
             returnKeyType="send"
             onSubmitEditing={() => handleSubmit}
             valeu={password}
-            onChangText={setPassword}
+            onChangeText={setPassword}
           />
           <SubmitButton loading={loading} onPress={handleSubmit}>
             Acessar
