@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { MdNotifications } from 'react-icons/md';
 import { parseISO, formatDistance } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
+import socketio from 'socket.io-client';
 
 import api from '~/services/api';
 
@@ -22,6 +24,23 @@ export default function Notifications() {
     () => !!notifications.find(notification => notification.read === false),
     [notifications]
   );
+
+  const user = useSelector(state => state.user.profile);
+
+  // Criando a conexão socket e passando o id do usuário como um parâmetro adicional
+  const socket = useMemo(() => {
+    socketio('http://localhost:3333', {
+      query: {
+        user_id: user.id,
+      },
+    });
+  }, [user.id]);
+
+  useEffect(() => {
+    socket.on('notication', notification => {
+      SetNotifications([notification, ...notifications]);
+    });
+  }, [socket, notifications]);
 
   useEffect(() => {
     async function loadNotifications() {
