@@ -28,16 +28,18 @@ export default function Notifications() {
   const user = useSelector(state => state.user.profile);
 
   // Criando a conexão socket e passando o id do usuário como um parâmetro adicional
-  const socket = useMemo(() => {
-    socketio('http://localhost:3333', {
-      query: {
-        user_id: user.id,
-      },
-    });
-  }, [user.id]);
+  const socket = useMemo(
+    () =>
+      socketio('http://localhost:3333', {
+        query: {
+          user_id: user.id,
+        },
+      }),
+    [user.id]
+  );
 
   useEffect(() => {
-    socket.on('notication', notification => {
+    socket.on('notification', notification => {
       SetNotifications([notification, ...notifications]);
     });
   }, [socket, notifications]);
