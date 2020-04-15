@@ -26,6 +26,7 @@ export default function user(state = INITIAL_STATE, action) {
       }
       case '@auth/SING_OUT': {
         draft.profile = null;
+        draft.loading = false;
         break;
       }
       default:
