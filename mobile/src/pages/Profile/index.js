@@ -9,9 +9,11 @@ import {
   FormInput,
   SubmitButton,
   Separator,
+  LogoutButton,
 } from './styles';
 
 import {updateProfileRequest} from '~/store/modules/user/actions';
+import {singOut} from '~/store/modules/auth/actions';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -29,6 +31,10 @@ export default function Profile() {
   const oldPasswordRef = useRef();
   const passwordRef = useRef();
   const confirmPassawordRef = useRef();
+
+  function handleLogout() {
+    dispatch(singOut());
+  }
 
   function handleSubmit() {
     const data = {name, email, oldPassword, password, confirmPassaword};
@@ -107,6 +113,7 @@ export default function Profile() {
           <SubmitButton loading={loading} onPress={handleSubmit}>
             Atualizar Perfil
           </SubmitButton>
+          <LogoutButton onPress={handleLogout}>Sair do GoBaber</LogoutButton>
         </Form>
       </Container>
     </Background>
