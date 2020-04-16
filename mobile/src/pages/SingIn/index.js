@@ -40,7 +40,7 @@ export default function SingIn({navigation}) {
             placeholder="Digite seu e-mail"
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
-            valeu={email}
+            value={email}
             onChangeText={setEmail}
           />
           <FormInput
@@ -50,7 +50,7 @@ export default function SingIn({navigation}) {
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={() => handleSubmit}
-            valeu={password}
+            value={password}
             onChangeText={setPassword}
           />
           <SubmitButton loading={loading} onPress={handleSubmit}>

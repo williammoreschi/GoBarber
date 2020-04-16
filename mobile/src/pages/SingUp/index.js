@@ -45,7 +45,7 @@ export default function SingUp({navigation}) {
             placeholder="Nome Completo"
             returnKeyType="next"
             onSubmitEditing={() => emailRef.current.focus()}
-            valeu={name}
+            value={name}
             onChangeText={setName}
           />
           <FormInput
@@ -57,7 +57,7 @@ export default function SingUp({navigation}) {
             ref={emailRef}
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
-            valeu={email}
+            value={email}
             onChangeText={setEmail}
           />
           <FormInput
@@ -67,7 +67,7 @@ export default function SingUp({navigation}) {
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={() => handleSubmit}
-            valeu={password}
+            value={password}
             onChangeText={setPassword}
           />
           <SubmitButton loading={loading} onPress={handleSubmit}>
