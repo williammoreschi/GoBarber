@@ -30,7 +30,7 @@ export default function SingUp({navigation}) {
   const passwordRef = useRef();
 
   function handleSubmit() {
-    dispatch(singUpRequest());
+    dispatch(singUpRequest(name, email, password));
   }
 
   return (
