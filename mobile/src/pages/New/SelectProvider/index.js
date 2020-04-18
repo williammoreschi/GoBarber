@@ -14,7 +14,6 @@ export default function SelectProvider({navigation}) {
   useEffect(() => {
     async function loadProviders() {
       const response = await api.get('providers');
-      console.tron.log(response.data);
       setProviders(response.data);
     }
     loadProviders();
