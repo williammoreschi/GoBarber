@@ -1,17 +1,14 @@
 import React, {useMemo} from 'react';
 import {formatRelative, parseISO} from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import {TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
 
 import Background from '~/components/Background';
 import {Container, Avatar, Name, Time, SubmitButton} from './styles';
 
-export default function Confirm({navigation}) {
-  const provider = navigation.getParam('provider');
-  const hour = navigation.getParam('hour');
+export default function Confirm({navigation, route}) {
+  const {provider, hour} = route.params;
   const dateFormatted = useMemo(
     () => formatRelative(parseISO(hour), new Date(), {locale: pt}),
     [hour],
@@ -45,16 +42,3 @@ export default function Confirm({navigation}) {
     </Background>
   );
 }
-
-Confirm.navigationOptions = ({navigation}) => ({
-  title: 'Confirmar',
-  headerTitleAlign: 'center',
-  headerLeft: () => (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.goBack();
-      }}>
-      <Icon name="chevron-left" size={20} color="#fff" />
-    </TouchableOpacity>
-  ),
-});

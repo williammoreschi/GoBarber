@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import {withNavigationFocus} from 'react-navigation';
+import {useIsFocused} from '@react-navigation/native';
 
 import api from '~/services/api';
 
@@ -8,8 +7,10 @@ import Background from '~/components/Background';
 import Appointment from '~/components/Appointment';
 import {Container, Title, List} from './styles';
 
-function Dashboard({isFocused}) {
+export default function Dashboard() {
   const [appointments, setAppointments] = useState([]);
+
+  const isFocused = useIsFocused();
 
   async function loadAppointments() {
     const response = await api.get('appointments');
@@ -56,12 +57,3 @@ function Dashboard({isFocused}) {
     </Background>
   );
 }
-
-Dashboard.navigationOptions = {
-  tabBarLabel: 'Agendamentos',
-  tabBarIcon: ({tintColor}) => (
-    <Icon name="event" size={20} color={tintColor} />
-  ),
-};
-
-export default withNavigationFocus(Dashboard);

@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
 
@@ -9,11 +7,11 @@ import DateInput from '~/components/DateInput';
 
 import {Container, HoursList, Hour, Title} from './styles';
 
-export default function SelectDateTime({navigation}) {
+export default function SelectDateTime({navigation, route}) {
   const [date, setDate] = useState(new Date());
   const [hours, setHours] = useState([]);
 
-  const provider = navigation.getParam('provider');
+  const {provider} = route.params;
 
   useEffect(() => {
     async function loadAvailable() {
@@ -53,16 +51,3 @@ export default function SelectDateTime({navigation}) {
     </Background>
   );
 }
-
-SelectDateTime.navigationOptions = ({navigation}) => ({
-  title: 'Selecione uma Data/Horário',
-  headerTitleAlign: 'center',
-  headerLeft: () => (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.goBack();
-      }}>
-      <Icon name="chevron-left" size={20} color="#fff" />
-    </TouchableOpacity>
-  ),
-});
