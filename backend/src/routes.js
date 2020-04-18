@@ -32,7 +32,7 @@ routes.put('/users', UserController.update);
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.get('/providers', ProviderController.index);
-routes.post('/providers/:providerId/available', AvailableControllers.index);
+routes.get('/providers/:providerId/available', AvailableControllers.index);
 
 routes.get('/appointments', AppointmentController.index);
 routes.post('/appointments', AppointmentController.store);
