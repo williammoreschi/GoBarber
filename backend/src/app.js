@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import helmet from 'helmet';
 import cors from 'cors';
 import Youch from 'youch';
 import path from 'path';
@@ -52,6 +53,7 @@ class App {
   middlewares() {
     this.app.use(Sentry.Handlers.requestHandler());
     this.app.use(cors());
+    this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(
       '/files',

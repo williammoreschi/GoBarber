@@ -1,5 +1,8 @@
 import { Router } from 'express';
 import multer from 'multer';
+import Brute from 'express-brute';
+import BruteRedis from 'express-brute-redis';
+
 import multerConfig from './config/multer';
 import SessionController from './app/controllers/SessionController';
 import UserController from './app/controllers/UserController';
@@ -20,11 +23,23 @@ import validateAppointmentStore from './app/validators/AppointmentStore';
 const routes = new Router();
 const upload = multer(multerConfig);
 
+const bruteStore = new BruteRedis({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+});
+
+const bruteForce = new Brute(bruteStore);
+
 routes.get('/', (req, res) => res.json({ message: 'Online... :)' }));
 
 routes.post('/users', validateUserStore, UserController.store);
 
-routes.post('/sessions', validateSessionStore, SessionController.store);
+routes.post(
+  '/sessions',
+  bruteForce.prevent,
+  validateSessionStore,
+  SessionController.store
+);
 
 /*
  * Nesse ponto definimos que authMiddleware sera uma função global.
